@@ -10,6 +10,35 @@ int main() {
     printf("Desafio Xadrez!\n");
     printf("Novo commit\n");
 
+    char estado[50];
+    char codigoDaCarta[50];
+    char nomeDaCidade[50];
+    int populacao;
+    int pontosTuristicos;
+    float pib;
+    float areaEmKm2;
+
+    printf("Código da carta: \n");
+    scanf("%s", codigoDaCarta);
+
+    printf("Estado: \n");
+    scanf("%s", estado);
+
+    printf("Nome da cidade: \n");
+    scanf("%s", nomeDaCidade);
+
+    printf("População: \n");
+    scanf("%d", &populacao);
+
+    printf("Área: \n");
+    scanf("%f", &areaEmKm2);
+
+    printf("PIB: \n");
+    scanf("%f", &pib);
+
+    printf("Pontos turísticos: \n");
+    scanf("%d", &pontosTuristicos);
+
     // Sugestão: Defina variáveis separadas para cada atributo da cidade.
     // Exemplos de atributos: código da cidade, nome, população, área, PIB, número de pontos turísticos.
     
