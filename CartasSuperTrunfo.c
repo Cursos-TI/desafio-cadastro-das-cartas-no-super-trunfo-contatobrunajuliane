@@ -82,5 +82,14 @@ int main() {
     printf("PIB per Capita: Carta 1 venceu (%d)\n", vPIBperCapita);
     printf("Super Poder: Carta 1 venceu (%d)\n", vSuperPoder);
 
-    return 0;
-}
+    if(populacao1 > populacao2){
+        printf("Carta 1 Venceu!\n");
+    }
+        else{
+            printf("Carta 2 Venceu!\n");
+
+        }
+
+            return 0;
+
+    }
