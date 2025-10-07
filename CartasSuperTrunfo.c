@@ -63,7 +63,7 @@ int main() {
     pibPerCapita2 = (pib2 * 1000000000) / populacao2;
     superPoder2 = (float)populacao2 + area2 + pib2 + pontosTuristicos2 + pibPerCapita2 + (1.0 / densidade2);
 
-    // Comparações
+    
     int vPopulacao = populacao1 > populacao2;
     int vArea = area1 > area2;
     int vPIB = pib1 > pib2;
@@ -72,7 +72,7 @@ int main() {
     int vPIBperCapita = pibPerCapita1 > pibPerCapita2;
     int vSuperPoder = superPoder1 > superPoder2;
 
-    // Exibição dos resultados
+    
     printf("\nComparação de Cartas:\n");
     printf("População: Carta 1 venceu (%d)\n", vPopulacao);
     printf("Área: Carta 1 venceu (%d)\n", vArea);
@@ -84,85 +84,88 @@ int main() {
 
     int opcao;
 
-// Menu interativo
-printf("\nEscolha o atributo para comparar:\n");
+
+int atributo1, atributo2;
+float valor1_carta1, valor1_carta2;
+float valor2_carta1, valor2_carta2;
+
+// Menu para o primeiro atributo
+printf("\nEscolha o primeiro atributo para comparar:\n");
 printf("1 - População\n");
 printf("2 - Área\n");
 printf("3 - PIB\n");
 printf("4 - Pontos Turísticos\n");
 printf("5 - Densidade Demográfica\n");
-printf("Digite o número da opção: ");
-scanf("%d", &opcao);
+scanf("%d", &atributo1);
 
-// Exibição dos nomes
-printf("\nComparando %s vs %s\n", nome1, nome2);
-
-// Switch para comparação
-switch (opcao) {
-    case 1:
-        printf("Atributo: População\n");
-        printf("%s: %lu\n", nome1, populacao1);
-        printf("%s: %lu\n", nome2, populacao2);
-        if (populacao1 > populacao2)
-            printf("Vencedora: %s\n", nome1);
-        else if (populacao2 > populacao1)
-            printf("Vencedora: %s\n", nome2);
-        else
-            printf("Empate!\n");
-        break;
-
-    case 2:
-        printf("Atributo: Área\n");
-        printf("%s: %.2f km²\n", nome1, area1);
-        printf("%s: %.2f km²\n", nome2, area2);
-        if (area1 > area2)
-            printf("Vencedora: %s\n", nome1);
-        else if (area2 > area1)
-            printf("Vencedora: %s\n", nome2);
-        else
-            printf("Empate!\n");
-        break;
-
-    case 3:
-        printf("Atributo: PIB\n");
-        printf("%s: %.2f bilhões\n", nome1, pib1);
-        printf("%s: %.2f bilhões\n", nome2, pib2);
-        if (pib1 > pib2)
-            printf("Vencedora: %s\n", nome1);
-        else if (pib2 > pib1)
-            printf("Vencedora: %s\n", nome2);
-        else
-            printf("Empate!\n");
-        break;
-
-    case 4:
-        printf("Atributo: Pontos Turísticos\n");
-        printf("%s: %d\n", nome1, pontosTuristicos1);
-        printf("%s: %d\n", nome2, pontosTuristicos2);
-        if (pontosTuristicos1 > pontosTuristicos2)
-            printf("Vencedora: %s\n", nome1);
-        else if (pontosTuristicos2 > pontosTuristicos1)
-            printf("Vencedora: %s\n", nome2);
-        else
-            printf("Empate!\n");
-        break;
-
-    case 5:
-        printf("Atributo: Densidade Demográfica\n");
-        printf("%s: %.2f hab/km²\n", nome1, densidade1);
-        printf("%s: %.2f hab/km²\n", nome2, densidade2);
-        if (densidade1 < densidade2)
-            printf("Vencedora: %s\n", nome1);
-        else if (densidade2 < densidade1)
-            printf("Vencedora: %s\n", nome2);
-        else
-            printf("Empate!\n");
-        break;
-
-    default:
-        printf("Opção inválida. Tente novamente com um número de 1 a 5.\n");
-        break;
+// Menu dinâmico para o segundo atributo
+printf("\nEscolha o segundo atributo (diferente do primeiro):\n");
+for (int i = 1; i <= 5; i++) {
+    if (i != atributo1) {
+        switch (i) {
+            case 1: printf("1 - População\n"); break;
+            case 2: printf("2 - Área\n"); break;
+            case 3: printf("3 - PIB\n"); break;
+            case 4: printf("4 - Pontos Turísticos\n"); break;
+            case 5: printf("5 - Densidade Demográfica\n"); break;
+        }
+    }
 }
+scanf("%d", &atributo2);
+
+// Validação
+if (atributo1 == atributo2 || atributo1 < 1 || atributo1 > 5 || atributo2 < 1 || atributo2 > 5) {
+    printf("Erro: atributos inválidos ou repetidos.\n");
+    return 1;
+}
+
+// Função auxiliar (em forma de macro simples)
+#define GET_VAL(attr, carta) ( \
+    attr == 1 ? (carta == 1 ? populacao1 : populacao2) : \
+    attr == 2 ? (carta == 1 ? area1 : area2) : \
+    attr == 3 ? (carta == 1 ? pib1 : pib2) : \
+    attr == 4 ? (carta == 1 ? pontosTuristicos1 : pontosTuristicos2) : \
+                (carta == 1 ? densidade1 : densidade2) )
+
+// Obter valores
+valor1_carta1 = GET_VAL(atributo1, 1);
+valor1_carta2 = GET_VAL(atributo1, 2);
+valor2_carta1 = GET_VAL(atributo2, 1);
+valor2_carta2 = GET_VAL(atributo2, 2);
+
+
+int v1 = (atributo1 == 5) ? (valor1_carta1 < valor1_carta2) : (valor1_carta1 > valor1_carta2);
+int v2 = (atributo2 == 5) ? (valor2_carta1 < valor2_carta2) : (valor2_carta1 > valor2_carta2);
+
+
+float soma1 = valor1_carta1 + valor2_carta1;
+float soma2 = valor1_carta2 + valor2_carta2;
+
+
+printf("\nComparando %s vs %s\n", nome1, nome2);
+printf("Atributo 1: %s\n", atributo1 == 1 ? "População" :
+                             atributo1 == 2 ? "Área" :
+                             atributo1 == 3 ? "PIB" :
+                             atributo1 == 4 ? "Pontos Turísticos" : "Densidade Demográfica");
+printf("%s: %.2f | %s: %.2f\n", nome1, valor1_carta1, nome2, valor1_carta2);
+
+printf("Atributo 2: %s\n", atributo2 == 1 ? "População" :
+                             atributo2 == 2 ? "Área" :
+                             atributo2 == 3 ? "PIB" :
+                             atributo2 == 4 ? "Pontos Turísticos" : "Densidade Demográfica");
+printf("%s: %.2f | %s: %.2f\n", nome1, valor2_carta1, nome2, valor2_carta2);
+
+printf("\nSoma dos atributos:\n");
+printf("%s: %.2f\n", nome1, soma1);
+printf("%s: %.2f\n", nome2, soma2);
+
+
+if (soma1 > soma2)
+    printf("Vencedora: %s\n", nome1);
+else if (soma2 > soma1)
+    printf("Vencedora: %s\n", nome2);
+else
+    printf("Empate!\n");
 
             return 0;
     }

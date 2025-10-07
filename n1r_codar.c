@@ -1,61 +1,38 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
-int main (){
-   int escolhaJogador, escolhaComputador;
+int main(){
+   int numeroJogador, numeroComputador, resultado;
+   char tipoComparacao;
+
    srand(time(0));
+   numeroComputador = rand () %100 +1;
+   
+   printf("Bem vindo ao jogo Maior, Menor ou Igual!\n");
+   printf("Você deve escolher um número e o tipo de comparação.\n");
+   printf("M. Maior\n");
+   printf("N. Menor\n");
+   printf("I. Igual\n");
 
-   printf("Jogo de Jokenpô\n");
-   printf("Escolha uma opção\n");
-   printf("1. Pedra\n");
-   printf("2. Papel\n");
-   printf("3. Tesoura\n");
-   printf("Escolha: ");
-   scanf("%d", &escolhaJogador);
+   printf("Escolha a comparação: ");
+   scanf("%c", &tipoComparacao);
 
-   escolhaComputador = rand() %  3 + 1;
+   printf("Digite seu número (entre 1 e 100): ");
+   scanf("%d", &numeroJogador);  
 
-   switch (escolhaJogador)
+   printf("O número do computador é: %d\n", numeroComputador);
+   
+   switch (tipoComparacao)
    {
-    case1:
-       printf("Jogador: Pedra - ");
-       break;
-    case2:
-       printf("Jogador: Papel - ");
-       break;
-    case3:
-       printf("Jogador: Tesoura - ");
-       break;
-       default:
-       printf("Opção inválida\n");
-   }  
-
-
-   switch (escolhaComputador)
-   {
-    case 1:
-       printf("Computador: Pedra\n");
-       break;
-    case 2:
-       printf("Computador: Papel\n");
-       break;
-    case 3:
-       printf("Computador: Tesoura\n");
-       break;
+   case 'M':
+      break;
+   case 'N':
+      break;
+   case 'I':
+      break;   
+   default:
+      printf("Opção de jogo inválida")
+      break;
    }
-    
-    if (escolhaComputador == escolhaJogador)
-    { 
-        printf("### Jogo empatou! ###\n");
-    } else if ((escolhaJogador == 1) && (escolhaComputador == 3) ||
-               (escolhaJogador == 2) && (escolhaJogador == 1 ) ||
-               (escolhaJogador == 3) && (escolhaComputador == 2))
-    {
-        printf("### Parabéns, você ganhou!\n");
-    }   else {
-        printf("### Você perdeu!\n");
-    }
-    
-   return 0;
+
+
 }
